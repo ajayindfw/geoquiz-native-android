@@ -1,8 +1,11 @@
 package com.lennox.geoquiz;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -79,7 +82,7 @@ public class GeoQuiz extends Activity {
         Log.d(TAG, "onDestroy() called");
     }
 
-    @Override
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB) @Override
     protected void onCreate(Bundle savedInstanceState)  {
     	Log.d(TAG, "onCreate(Bundle) called");
     		super.onCreate(savedInstanceState);
@@ -143,6 +146,12 @@ public class GeoQuiz extends Activity {
 		});
         
         mIsCheater =  ((savedInstanceState != null) ? savedInstanceState.getBoolean(CHEATER_INDEX): false);
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+        {
+        	ActionBar actionBar = getActionBar();
+        	actionBar.setSubtitle("Geo Quiz");
+        }
     }
 
 
